@@ -1,0 +1,20 @@
+Package: inlineSVG
+Title: Insert plots and SVG as inline content into Quarto and R Markdown
+Version: 0.0.0.9000
+Authors@R: 
+    person("Matt", "Kerlogue", , "matt.kerlogue@me.com", role = c("aut", "cre"))
+Description: Render plots as SVG content and insert this or other SVG content
+    into Quarto and R Markdown output as inline content.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    cli,
+    grDevices,
+    htmltools,
+    rlang,
+    svglite,
+    xml2
+Suggests: 
+    ggplot2
