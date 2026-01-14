@@ -52,11 +52,11 @@
 #' @export
 svg_plot <- function(
   plot,
-path = NULL,
+  path = NULL,
   width,
   height,
   units = c("px", "pt", "cm", "mm", "in"),
-    overwrite = TRUE,
+  overwrite = TRUE,
   standalone = TRUE,
   ...
 ) {
@@ -90,11 +90,11 @@ path = NULL,
 #' @export
 inline_svg_plot <- function(
   plot,
-path = NULL,
+  path = NULL,
   width,
   height,
   units = c("px", "pt", "cm", "mm", "in"),
-    overwrite = NULL,
+  overwrite = NULL,
   alt_title = NULL,
   alt_description = NULL,
   id = NULL,
@@ -207,22 +207,24 @@ inline_svg_file <- function(
   }
 
   # alt text elements
-  alt_elements <- character()
+  alt_elements <- list()
 
   if (!is.null(alt_title)) {
-    alt_title_id <- paste0(id, "-title")
-    alt_title_tag <- create_alt_tag("alt_title", alt_title, alt_title_id)
-    alt_elements <- c(alt_elements, "title" = alt_title_id)
+    alt_elements$title$id <- paste0(id, "-title")
+    alt_elements$title$tag <- create_alt_tag(
+      "alt_title",
+      alt_title,
+      alt_elements$title$id
+    )
   }
 
   if (!is.null(alt_description)) {
-    alt_desc_id <- paste0(id, "-desc")
-    alt_desc_tag <- create_alt_tag(
+    alt_elements$desc$id <- paste0(id, "-desc")
+    alt_elements$desc$tag <- create_alt_tag(
       "alt_description",
       alt_description,
-      alt_desc_id
+      alt_elements$desc$id
     )
-    alt_elements <- c(alt_elements, "desc" = alt_desc_id)
   }
 
   # insert role
@@ -237,20 +239,24 @@ inline_svg_file <- function(
   # insert alt
   if (length(alt_elements) == 2) {
     svg_xml |>
-      xml2::xml_add_child(alt_title_tag, .where = 0) |>
-      xml2::xml_add_sibling(alt_desc_tag)
+      xml2::xml_add_child(alt_elements$title$tag, .where = 0) |>
+      xml2::xml_add_sibling(alt_elements$desc$tag)
 
-    xml2::xml_set_attr(svg_xml, "aria-labelledby", paste(unname(alt_elements)))
-  } else if (length(alt_elements) == 1) {
-    if (names(alt_elements) == "title") {
-      svg_xml |>
-        xml2::xml_add_child(alt_title_tag, .where = 0)
-    } else {
-      svg_xml |>
-        xml2::xml_add_child(alt_desc_tag, .where = 0)
-    }
+    aria_label <- paste(
+      alt_elements$title$id,
+      alt_elements$desc$id,
+      collapse = " "
+    )
 
-    xml2::xml_set_attr(svg_xml, "aria-labelledby", paste(unname(alt_elements)))
+    xml2::xml_set_attr(svg_xml, "aria-labelledby", aria_label)
+  } else if (length(alt_elements) == 1 & !is.null(alt_title)) {
+    svg_xml |>
+      xml2::xml_add_child(alt_elements$title$tag, .where = 0)
+    xml2::xml_set_attr(svg_xml, "aria-lebelledby", alt_elements$title$id)
+  } else if (length(alt_elements) == 1 & !is.null(alt_description)) {
+    svg_xml |>
+      xml2::xml_add_child(alt_elements$desc$id, .where = 0)
+    xml2::xml_set_attr(svg_xml, "aria-labelledby", alt_elements$desc$id)
   }
 
   # handle dimensions
