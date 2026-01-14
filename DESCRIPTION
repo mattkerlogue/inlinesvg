@@ -1,4 +1,4 @@
-Package: inlineSVG
+Package: inlinesvg
 Title: Insert plots and SVG as inline content into Quarto and R Markdown
 Version: 0.0.0.9000
 Authors@R: 

@@ -1,19 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# inlineSVG
+# inlinesvg
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-`{inlineSVG}` is a package that makes it easy to include plots (and
+`{inlinesvg}` is a package that makes it easy to include plots (and
 other content) as inline SVG elements in Quarto and R Markdown
 documents.
 
 ## Installation
 
-You can install the development version of inlineSVG from
+You can install the development version of inlinesvg from
 [GitHub](https://github.com/) with:
 
 ``` r

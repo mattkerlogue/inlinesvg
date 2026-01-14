@@ -13,17 +13,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-# inlineSVG
+# inlinesvg
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-`{inlineSVG}` is a package that makes it easy to include plots (and other
+`{inlinesvg}` is a package that makes it easy to include plots (and other
 content) as inline SVG elements in Quarto and R Markdown documents.
 
 ## Installation
 
-You can install the development version of inlineSVG from
+You can install the development version of inlinesvg from
 [GitHub](https://github.com/) with:
 
 ``` r
