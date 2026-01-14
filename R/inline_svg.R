@@ -69,7 +69,7 @@ svg_plot <- function(
   check_path_overwrite(path, overwrite)
 
   width_in <- convert_to_in(width, units, .dim = "width")
-  height_in <- convert_to_in(width, units, .dim = "height")
+  height_in <- convert_to_in(height, units, .dim = "height")
 
   message(path)
 
@@ -196,6 +196,7 @@ inline_svg_file <- function(
   units = NULL
 ) {
   check_path_exists(path)
+  dimensions <- match.arg(dimensions)
 
   svg_xml <- xml2::read_xml(path)
 
