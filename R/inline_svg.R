@@ -31,10 +31,10 @@
 #' `alt_description`.
 #'
 #' @param plot A graphics object to plot.
+#' @param path A file path to save the SVG plot to (optional).
 #' @param width Width of the output plot.
 #' @param height Height of the output plot.
 #' @param units Units used for width and height.
-#' @param path A file path to save the SVG plot to (optional).
 #' @param overwrite Should files be overwritten (default is `TRUE`)
 #' @param alt_title Short alt text to include in the inline SVG (optional).
 #' @param alt_description Long-form alt text to include in the inline SVG
@@ -52,11 +52,11 @@
 #' @export
 svg_plot <- function(
   plot,
+path = NULL,
   width,
   height,
   units = c("px", "pt", "cm", "mm", "in"),
-  path = NULL,
-  overwrite = TRUE,
+    overwrite = TRUE,
   standalone = TRUE,
   ...
 ) {
@@ -83,18 +83,18 @@ svg_plot <- function(
   grid::grid.draw(plot)
   grDevices::dev.off()
 
-  return(path)
+  invisible(path)
 }
 
 #' @rdname plot
 #' @export
 inline_svg_plot <- function(
   plot,
+path = NULL,
   width,
   height,
   units = c("px", "pt", "cm", "mm", "in"),
-  path = NULL,
-  overwrite = NULL,
+    overwrite = NULL,
   alt_title = NULL,
   alt_description = NULL,
   id = NULL,
