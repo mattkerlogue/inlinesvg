@@ -8,10 +8,10 @@
 \usage{
 svg_plot(
   plot,
+  path = NULL,
   width,
   height,
   units = c("px", "pt", "cm", "mm", "in"),
-  path = NULL,
   overwrite = TRUE,
   standalone = TRUE,
   ...
@@ -19,10 +19,10 @@ svg_plot(
 
 inline_svg_plot(
   plot,
+  path = NULL,
   width,
   height,
   units = c("px", "pt", "cm", "mm", "in"),
-  path = NULL,
   overwrite = NULL,
   alt_title = NULL,
   alt_description = NULL,
@@ -35,13 +35,13 @@ inline_svg_plot(
 \arguments{
 \item{plot}{A graphics object to plot.}
 
+\item{path}{A file path to save the SVG plot to (optional).}
+
 \item{width}{Width of the output plot.}
 
 \item{height}{Height of the output plot.}
 
 \item{units}{Units used for width and height.}
-
-\item{path}{A file path to save the SVG plot to (optional).}
 
 \item{overwrite}{Should files be overwritten (default is \code{TRUE})}
 
