@@ -9,12 +9,12 @@
 Source:
 [`DESCRIPTION`](https://github.com/mattkerlogue/inlinesvg/blob/main/DESCRIPTION)
 
-Kerlogue M (2026). *inlineSVG: Insert plots and SVG as inline content
+Kerlogue M (2026). *inlinesvg: Insert plots and SVG as inline content
 into Quarto and R Markdown*. R package version 0.0.0.9000,
 <https://mattkerlogue.github.io/inlinesvg/>.
 
     @Manual{,
-      title = {inlineSVG: Insert plots and SVG as inline content into Quarto and R Markdown},
+      title = {inlinesvg: Insert plots and SVG as inline content into Quarto and R Markdown},
       author = {Matt Kerlogue},
       year = {2026},
       note = {R package version 0.0.0.9000},

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Insert plots and SVG as inline content into Quarto and R Markdown • inlineSVG</title>
+<title>Insert plots and SVG as inline content into Quarto and R Markdown • inlinesvg</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">inlineSVG</a>
+    <a class="navbar-brand me-2" href="index.html">inlinesvg</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
@@ -46,15 +46,15 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="inlinesvg">inlineSVG<a class="anchor" aria-label="anchor" href="#inlinesvg"></a>
+<div class="page-header"><h1 id="inlinesvg">inlinesvg<a class="anchor" aria-label="anchor" href="#inlinesvg"></a>
 </h1></div>
-<!-- badges: start -->
+<!-- badges: start /
 <!-- badges: end -->
-<p><a href="https://mattkerlogue.github.io/inlinesvg/">inlineSVG</a> is a package that makes it easy to include plots (and other content) as inline SVG elements in Quarto and R Markdown documents.</p>
+<p><a href="https://mattkerlogue.github.io/inlinesvg/">inlinesvg</a> is a package that makes it easy to include plots (and other content) as inline SVG elements in Quarto and R Markdown documents.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of inlineSVG from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of inlinesvg from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"mattkerlogue/inlinesvg"</span><span class="op">)</span></span></code></pre></div>
@@ -62,20 +62,21 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>The <code><a href="reference/plot.html">inline_svg_plot()</a></code> function allows for the insertion of plots, either native <code><a href="reference/plot.html">plot()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot()</a></code> content, as inline SVG within Quarto or R Markdown HTML formats, and allowing for the provision of ARIA compliant alt text.</p>
-<p><code><a href="reference/plot.html">svg_plot()</a></code> provides an alternative mechanism for saving plots as SVG files compared to <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> or more complex methods for <code><a href="https://rdrr.io/r/base/plot.html" class="external-link">base::plot()</a></code>. <code><a href="reference/inline_svg_file.html">inline_svg_file()</a></code> provides a generalised method for inserting the content of SVG files into Quarto and R Markdown based HTML output.</p>
+<p>The <code><a href="reference/plot.html">inline_svg_plot()</a></code> function allows for the insertion of plots, such as native <code><a href="reference/plot.html">plot()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot2::ggplot()</a></code> content, as inline SVG within Quarto or R Markdown HTML formats, and allowing for the provision of ARIA compliant alt text. It is powered by two separate functions: <code><a href="reference/plot.html">svg_plot()</a></code> for rendering the plot and <code><a href="reference/inline_svg_file.html">inline_svg_file()</a></code> to insert the SVG content.</p>
+<p><code><a href="reference/plot.html">svg_plot()</a></code> provides an alternative mechanism for saving plots as SVG files compared to <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> or turning a the graphics device on and off for <code><a href="https://rdrr.io/r/base/plot.html" class="external-link">base::plot()</a></code>. <code><a href="reference/inline_svg_file.html">inline_svg_file()</a></code> provides a generalised method for inserting the content of SVG files into Quarto and R Markdown based HTML output.</p>
 </div>
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<p>This package is intended for use with <a href="https://www.quarto.org" class="external-link">Quarto</a> or <a href="https://rmarkdown.rstudio.com" class="external-link">R Markdown</a>, anf specifically HTML output formats from both of these.</p>
+<p>This package is intended for use with <a href="https://www.quarto.org" class="external-link">Quarto</a> or <a href="https://rmarkdown.rstudio.com" class="external-link">R Markdown</a>, and specifically HTML output formats from both of these.</p>
 <p>There are two main methods for producing SVG content from R:</p>
 <ul>
 <li>the native <code><a href="https://rdrr.io/r/grDevices/cairo.html" class="external-link">grDevices::svg()</a></code> (and related <code>Cairo::CairoSVG()</code>) device based on the <a href="https://www.cairographics.org" class="external-link">Cairo graphics library</a>, or</li>
 <li>the <code><a href="https://svglite.r-lib.org/reference/svglite.html" class="external-link">svglite::svglite()</a></code> device.</li>
 </ul>
 <p>When rendering plots in Quarto (and R Markdown) for HTML using a vector graphics output such as SVG is better than raster output such as JPEG or PNG since vector graphics can scale with changes in resolution. The standard approach to including graphics within Quarto or R Markdown content, either in raw format (e.g. <code>![alt](file)</code>) or via {knitr} cells results in the SVG content being rendered via an HTML <code>&lt;img&gt;</code> tag.</p>
-<p>Using the <code>&lt;img&gt;</code> tag results in the content being treated as if it were a raster-based image format such as JPEG or PNG. While web browsers will scale SVG content within an <code>&lt;img&gt;</code> tag, the internal components of the SVG are inaccessible to the browser engine meaning that it cannot be styled via CSS or interacted with (e.g. text cannot be selected). The <code>{inlinesvg}</code> package provides an alternative approach by inserting SVG content directly into the HTML tree of a document.</p>
+<p>Using the <code>&lt;img&gt;</code> tag results in the content being treated as if it were a raster-based image format such as JPEG or PNG. While web browsers will scale SVG content within an <code>&lt;img&gt;</code> tag, the internal components of the SVG are inaccessible to the browser engine meaning that it cannot be styled via CSS or interacted with (e.g. text cannot be selected). The <a href="https://mattkerlogue.github.io/inlinesvg/">inlinesvg</a> package provides an alternative approach by inserting SVG content directly into the HTML tree of a document.</p>
+<p>While support for alt text has been added to <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>, <a href="https://svglite.r-lib.org" class="external-link">svglite</a> does not currently support alt text. <code><a href="reference/plot.html">inline_svg_plot()</a></code> and <code><a href="reference/inline_svg_file.html">inline_svg_file()</a></code> enable the incorporation of ARIA compliant short and long form alt text, through <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Guides/SVG_in_HTML#best_practices" class="external-link"><code>&lt;title&gt;</code> and <code>&lt;desc&gt;</code> tags</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -98,7 +99,7 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing inlineSVG</a></li>
+<li><a href="authors.html#citation">Citing inlinesvg</a></li>
 </ul>
 </div>
 

@@ -9,10 +9,10 @@ for saving plots as SVG files and inserting as inline_content.
 ``` r
 svg_plot(
   plot,
+  path = NULL,
   width,
   height,
   units = c("px", "pt", "cm", "mm", "in"),
-  path = NULL,
   overwrite = TRUE,
   standalone = TRUE,
   ...
@@ -20,10 +20,10 @@ svg_plot(
 
 inline_svg_plot(
   plot,
+  path = NULL,
   width,
   height,
   units = c("px", "pt", "cm", "mm", "in"),
-  path = NULL,
   overwrite = NULL,
   alt_title = NULL,
   alt_description = NULL,
@@ -40,6 +40,10 @@ inline_svg_plot(
 
   A graphics object to plot.
 
+- path:
+
+  A file path to save the SVG plot to (optional).
+
 - width:
 
   Width of the output plot.
@@ -51,10 +55,6 @@ inline_svg_plot(
 - units:
 
   Units used for width and height.
-
-- path:
-
-  A file path to save the SVG plot to (optional).
 
 - overwrite:
 
