@@ -47,6 +47,7 @@ body of the resulting HTML.</p>
 <span>  role <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alt_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alt_description <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  source_note <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  strip_ns <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"preserve"</span>, <span class="st">"strip"</span>, <span class="st">"replace"</span><span class="op">)</span>,</span>
 <span>  width <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -78,6 +79,11 @@ body of the resulting HTML.</p>
 <dt id="arg-alt-description">alt_description<a class="anchor" aria-label="anchor" href="#arg-alt-description"></a></dt>
 <dd><p>A longer description for assistive technology users
 (optional)</p></dd>
+
+
+<dt id="arg-source-note">source_note<a class="anchor" aria-label="anchor" href="#arg-source-note"></a></dt>
+<dd><p>Text to include in a containing <code>&lt;div&gt;</code> as a source or
+reference note below the image.</p></dd>
 
 
 <dt id="arg-strip-ns">strip_ns<a class="anchor" aria-label="anchor" href="#arg-strip-ns"></a></dt>
@@ -113,10 +119,18 @@ SVG that is rendered as an image and cannot be interacted with by the
 user (e.g. selecting text), nor can elements be modified by CSS.
 <code>inline_svg_file()</code> takes the content of an SVG file and inserts it as
 inline SVG content within the body of the rendered HTML document.</p>
-<p>Optionally an element 'id' can be specified (if not provided one will be
-created), and any dimensions specified in the <code>&lt;svg&gt;</code> tag can either be
-preserved, dropped or replaced. If an id attribute is detected in the
-existing <code>&lt;svg&gt;</code> tag then this argument will be ignored.</p>
+<p>Optionally an element <code>id</code> can be specified (if not provided one will be
+created), if provided will overwrite any existing 'id' attribute encoded in
+the SVG object.</p>
+<p>A <code>source_note</code> can be provided that will be included after the image, it
+has the class "svg-source-note" for styling with CSS and an id starting
+with "svg-source-note-" and then using the supplied or generated id.</p>
+<p><code><a href="https://svglite.r-lib.org/reference/svglite.html" class="external-link">svglite::svglite()</a></code> encodes the width and height (in points) of the object
+into the <code>&lt;svg&gt;</code> tag (in addition to the viewBox declaration), this can
+cause issues for responsive scaling of plots. The <code>dimensions</code> argument can
+<code>"preserve"</code> any existing dimensions (the default), <code>"strip"</code> the dimensions
+removing them from the tag, or <code>"replace"</code> them with new dimensions supplied
+using the <code>width</code>, <code>height</code> and <code>units</code> arguments.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

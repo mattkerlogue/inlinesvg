@@ -61,6 +61,7 @@ inserting as inline_content.</p>
 <span>  overwrite <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alt_title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  alt_description <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  source_note <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  explicit_size <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  standalone <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -114,6 +115,11 @@ header and namespace info (default is <code>FALSE</code>).</p></dd>
 (optional).</p></dd>
 
 
+<dt id="arg-source-note">source_note<a class="anchor" aria-label="anchor" href="#arg-source-note"></a></dt>
+<dd><p>Text to include in a containing <code>&lt;div&gt;</code> as a source or
+reference note below the image.</p></dd>
+
+
 <dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
 <dd><p>An id for referencing the SVG within the HTML/CSS (optional)</p></dd>
 
@@ -139,6 +145,7 @@ elsewhere it is advised to use an explicit path name and use
 temporary path provided by <code>svg_plot()</code>.</p>
 <p>An <code>id</code> for the inline SVG can be provided for so that it is directly
 accessible via HTML or CSS (e.g. for linking or styling).</p>
+<p>A <code>source_note</code> can be used to insert text immediately after the SVG image</p>
     </div>
     <div class="section level2">
     <h2 id="alt-text">Alt text<a class="anchor" aria-label="anchor" href="#alt-text"></a></h2>
