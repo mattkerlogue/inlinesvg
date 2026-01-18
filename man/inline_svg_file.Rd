@@ -10,6 +10,7 @@ inline_svg_file(
   role = NULL,
   alt_title = NULL,
   alt_description = NULL,
+  source_note = NULL,
   strip_ns = TRUE,
   dimensions = c("preserve", "strip", "replace"),
   width = NULL,
@@ -28,6 +29,9 @@ inline_svg_file(
 
 \item{alt_description}{A longer description for assistive technology users
 (optional)}
+
+\item{source_note}{Text to include in a containing \verb{<div>} as a source or
+reference note below the image.}
 
 \item{strip_ns}{Whether to remove the XML DTD}
 
@@ -55,8 +59,18 @@ user (e.g. selecting text), nor can elements be modified by CSS.
 \code{inline_svg_file()} takes the content of an SVG file and inserts it as
 inline SVG content within the body of the rendered HTML document.
 
-Optionally an element 'id' can be specified (if not provided one will be
-created), and any dimensions specified in the \verb{<svg>} tag can either be
-preserved, dropped or replaced. If an id attribute is detected in the
-existing \verb{<svg>} tag then this argument will be ignored.
+Optionally an element \code{id} can be specified (if not provided one will be
+created), if provided will overwrite any existing 'id' attribute encoded in
+the SVG object.
+
+A \code{source_note} can be provided that will be included after the image, it
+has the class "svg-source-note" for styling with CSS and an id starting
+with "svg-source-note-" and then using the supplied or generated id.
+
+\code{svglite::svglite()} encodes the width and height (in points) of the object
+into the \verb{<svg>} tag (in addition to the viewBox declaration), this can
+cause issues for responsive scaling of plots. The \code{dimensions} argument can
+\code{"preserve"} any existing dimensions (the default), \code{"strip"} the dimensions
+removing them from the tag, or \code{"replace"} them with new dimensions supplied
+using the \code{width}, \code{height} and \code{units} arguments.
 }

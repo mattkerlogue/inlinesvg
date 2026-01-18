@@ -26,6 +26,7 @@ inline_svg_plot(
   overwrite = NULL,
   alt_title = NULL,
   alt_description = NULL,
+  source_note = NULL,
   id = NULL,
   explicit_size = FALSE,
   standalone = FALSE,
@@ -55,6 +56,9 @@ header and namespace info (default is \code{FALSE}).}
 \item{alt_description}{Long-form alt text to include in the inline SVG
 (optional).}
 
+\item{source_note}{Text to include in a containing \verb{<div>} as a source or
+reference note below the image.}
+
 \item{id}{An id for referencing the SVG within the HTML/CSS (optional)}
 
 \item{explicit_size}{Whether the inline \verb{<svg>} tag should explicitly
@@ -82,6 +86,8 @@ temporary path provided by \code{svg_plot()}.
 
 An \code{id} for the inline SVG can be provided for so that it is directly
 accessible via HTML or CSS (e.g. for linking or styling).
+
+A \code{source_note} can be used to insert text immediately after the SVG image
 }
 \section{Alt text}{
 The \code{alt_title} and \code{alt_description} allow for the insertion of alt text

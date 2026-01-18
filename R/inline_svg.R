@@ -21,6 +21,8 @@
 #' An `id` for the inline SVG can be provided for so that it is directly
 #' accessible via HTML or CSS (e.g. for linking or styling).
 #'
+#' A `source_note` can be used to insert text immediately after the SVG image
+#'
 #' @details # Alt text
 #' The `alt_title` and `alt_description` allow for the insertion of alt text
 #' into the SVG content, `alt_title` is intended for short descriptions and
@@ -39,6 +41,8 @@
 #' @param alt_title Short alt text to include in the inline SVG (optional).
 #' @param alt_description Long-form alt text to include in the inline SVG
 #'   (optional).
+#' @param source_note Text to include in a containing `<div>` as a source or
+#'   reference note below the image.
 #' @param id An id for referencing the SVG within the HTML/CSS (optional)
 #' @param explicit_size Whether the inline `<svg>` tag should explicitly
 #'   include the dimensions of the plot (default is `FALSE`).
@@ -97,6 +101,7 @@ inline_svg_plot <- function(
   overwrite = NULL,
   alt_title = NULL,
   alt_description = NULL,
+  source_note = NULL,
   id = NULL,
   explicit_size = FALSE,
   standalone = FALSE,
@@ -142,6 +147,7 @@ inline_svg_plot <- function(
     role = "img",
     alt_title = alt_title,
     alt_description = alt_description,
+    source_note = source_note,
     strip_ns = TRUE,
     dimensions = dims,
     width = width,
@@ -162,10 +168,20 @@ inline_svg_plot <- function(
 #' `inline_svg_file()` takes the content of an SVG file and inserts it as
 #' inline SVG content within the body of the rendered HTML document.
 #'
-#' Optionally an element 'id' can be specified (if not provided one will be
-#' created), and any dimensions specified in the `<svg>` tag can either be
-#' preserved, dropped or replaced. If an id attribute is detected in the
-#' existing `<svg>` tag then this argument will be ignored.
+#' Optionally an element `id` can be specified (if not provided one will be
+#' created), if provided will overwrite any existing 'id' attribute encoded in
+#' the SVG object.
+#'
+#' A `source_note` can be provided that will be included after the image, it
+#' has the class "svg-source-note" for styling with CSS and an id starting
+#' with "svg-source-note-" and then using the supplied or generated id.
+#'
+#' `svglite::svglite()` encodes the width and height (in points) of the object
+#' into the `<svg>` tag (in addition to the viewBox declaration), this can
+#' cause issues for responsive scaling of plots. The `dimensions` argument can
+#' `"preserve"` any existing dimensions (the default), `"strip"` the dimensions
+#' removing them from the tag, or `"replace"` them with new dimensions supplied
+#' using the `width`, `height` and `units` arguments.
 #'
 #' @param path Path to the SVG file
 #' @param id An id value for the SVG element within the HTML document (optional)
@@ -173,6 +189,8 @@ inline_svg_plot <- function(
 #' @param alt_title A short title for assistive technology users (optional)
 #' @param alt_description A longer description for assistive technology users
 #'   (optional)
+#' @param source_note Text to include in a containing `<div>` as a source or
+#'   reference note below the image.
 #' @param strip_ns Whether to remove the XML DTD
 #' @param dimensions Whether to 'preserve' dimensions defined in the SVG tag,
 #'   to 'strip' them or 'replace' them with provided values
@@ -189,6 +207,7 @@ inline_svg_file <- function(
   role = NULL,
   alt_title = NULL,
   alt_description = NULL,
+  source_note = NULL,
   strip_ns = TRUE,
   dimensions = c("preserve", "strip", "replace"),
   width = NULL,
@@ -238,9 +257,10 @@ inline_svg_file <- function(
 
   # insert alt
   if (length(alt_elements) == 2) {
-    svg_xml |>
-      xml2::xml_add_child(alt_elements$title$tag, .where = 0) |>
-      xml2::xml_add_sibling(alt_elements$desc$tag)
+    xml2::xml_add_sibling(
+      xml2::xml_add_child(svg_xml, alt_elements$title$tag, .where = 0),
+      alt_elements$desc$tag
+    )
 
     aria_label <- paste(
       alt_elements$title$id,
@@ -250,12 +270,10 @@ inline_svg_file <- function(
 
     xml2::xml_set_attr(svg_xml, "aria-labelledby", aria_label)
   } else if (length(alt_elements) == 1 & !is.null(alt_title)) {
-    svg_xml |>
-      xml2::xml_add_child(alt_elements$title$tag, .where = 0)
+    xml2::xml_add_child(svg_xml, alt_elements$title$tag, .where = 0)
     xml2::xml_set_attr(svg_xml, "aria-lebelledby", alt_elements$title$id)
   } else if (length(alt_elements) == 1 & !is.null(alt_description)) {
-    svg_xml |>
-      xml2::xml_add_child(alt_elements$desc$id, .where = 0)
+    xml2::xml_add_child(svg_xml, alt_elements$desc$id, .where = 0)
     xml2::xml_set_attr(svg_xml, "aria-labelledby", alt_elements$desc$id)
   }
 
@@ -276,6 +294,16 @@ inline_svg_file <- function(
 
   # collapse string and insert
   svg_string <- as.character(svg_xml, options = "no_declaration")
+
+  if (!is.null(source_note)) {
+    source_string <- create_source_note(source_note, id)
+    svg_string <- paste0(
+      svg_string,
+      as.character(source_string, options = "no_declaration"),
+      collapse = "\n"
+    )
+  }
+
   return(htmltools::HTML(svg_string))
 }
 
@@ -292,4 +320,14 @@ create_alt_tag <- function(what = c("alt_title", "alt_description"), text, id) {
   )
 
   xml2::xml_new_root(tag, id = id, text)
+}
+
+create_source_note <- function(text, id) {
+  check_source_note(text)
+  xml2::xml_new_root(
+    "p",
+    id = paste0("svg-source-note-", id),
+    class = "source-note",
+    text
+  )
 }

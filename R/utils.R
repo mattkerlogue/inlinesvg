@@ -1,16 +1,16 @@
 # generic numeric value check
-check_numeric_scalar <- function(x, .caller) {
+check_numeric_scalar <- function(x, caller) {
   if (!is.numeric(x) || length(x) != 1) {
     cli::cli_abort(c(
-      "x" = "{.arg {.caller}} must be a numeric vector of length 1"
+      "x" = "{.arg {caller}} must be a numeric vector of length 1"
     ))
   }
 }
 
-check_character_scalar <- function(x, .caller) {
-  if (!is.character(x) && length(x) != 1) {
+check_character_scalar <- function(x, caller) {
+  if (!is.character(x) || length(x) != 1) {
     cli::cli_abort(c(
-      "x" = "{.arg {.caller}} must be a character vector of length 1"
+      "x" = "{.arg {caller}} must be a character vector of length 1"
     ))
   }
 }
@@ -93,6 +93,10 @@ check_alt_text <- function(text, what = c("alt_title", "alt_description")) {
       "i" = "For long-form alt text consider using {.arg alt_description}"
     ))
   }
+}
+
+check_source_note <- function(text) {
+  check_character_scalar(text, "source_note")
 }
 
 # list of valid CSS units
