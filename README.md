@@ -3,7 +3,9 @@
 
 # inlinesvg <a href="https://mattkerlogue.github.io/inlinesvg/"><img src="man/figures/logo.png" align="right" height="138" alt="inlinesvg website" /></a>
 
-<!-- badges: start /
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/mattkerlogue/inlinesvg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mattkerlogue/inlinesvg/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `{inlinesvg}` is a package that makes it easy to include plots (and

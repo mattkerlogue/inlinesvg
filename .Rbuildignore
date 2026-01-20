@@ -8,3 +8,5 @@
 ^README\.Rmd$
 ^vignettes/articles$
 inst/logo
+^[.]?air[.]toml$
+^\.vscode$
