@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# inlinesvg
+# inlinesvg <a href="https://mattkerlogue.github.io/inlinesvg/"><img src="man/figures/logo.png" align="right" height="138" alt="inlinesvg website" /></a>
 
 <!-- badges: start /
 <!-- badges: end -->
